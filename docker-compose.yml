@@ -1,0 +1,31 @@
+version: "3"
+services:
+  juno:
+    build:
+      context: .
+      dockerfile: Dockerfile-juno
+    deploy:
+      resources:
+        limits:
+          cpus: "3"
+          memory: 19G
+      restart_policy:
+        condition: on-failure
+    environment:
+      - NB_USER=chi
+      - JUPYTER_ENABLE_LAB=yes
+    working_dir: "/home/$NB_USER"
+    ports:
+      - "127.0.0.1:8890:8888"
+      - "127.0.0.1:8080:8080"
+      - "127.0.0.1:5000:5000"
+    networks:
+      - default
+    volumes:
+      - /home/karol/Projects/shared:/home/$NB_USER/shared
+  #spark:
+  #mlflow:
+
+networks:
+  default:
+

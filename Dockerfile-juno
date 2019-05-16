@@ -1,0 +1,34 @@
+FROM jupyter/pyspark-notebook
+
+# add jupyter config file with password to skip token prompts
+ADD ./misc/jupyter_notebook_config.py .jupyter/jupyter_notebook_config.py
+
+
+# installing python packages from requirements.txt
+COPY requirements.txt ./shared/misc/
+RUN pip install -r ./shared/misc/requirements.txt && \
+    fix-permissions $CONDA_DIR && \
+    fix-permissions /home/$NB_USER
+
+# extensions for lab
+# TOC
+RUN jupyter labextension install @jupyterlab/toc 
+# snippets
+RUN pip install jupyterlab_snippets
+RUN jupyter labextension install @quentinandre/jupyterlab_snippets
+# qgrid
+RUN pip install qgrid
+RUN jupyter nbextension enable --py --sys-prefix qgrid
+RUN jupyter nbextension enable --py --sys-prefix widgetsnbextension
+RUN jupyter labextension install qgrid
+# variables inspector
+RUN jupyter labextension install @lckr/jupyterlab_variableinspector
+
+
+# notebook extensions
+RUN pip install jupyter_contrib_nbextensions && \
+                jupyter contrib nbextension install --user 
+
+
+# Check if all extensions work
+# install actual spark or create separate spark master service (preferred)
