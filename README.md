@@ -15,6 +15,7 @@ This docker has mounted volume to ~/shared folder on my local machine which cont
     - by default includes scipy stack with python3 and pyspark  
     - additional packages in requirements.txt (tensorflow, imblearn, nltk)  
     - jupyter_notebook_config.py - starts locally with no token, just hashed, required password  
+    - includes few jupyter_lab extensions - qgrid, toc, snippets, variables inspector
   2. mlflow (work in progress):  
     - image with Databricks MLFlow for automated model training, logging (and potential deployment?)  
   3. spark (work in progress):  
