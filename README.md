@@ -21,6 +21,9 @@ This docker has mounted volume to ~/shared folder on my local machine which cont
   3. spark (work in progress):  
     - image running Apache Spark on standalone (local) node  
 
+### Running Docker Container:
+  1. docker run -t -i -p 8890:8888 lifeofchisqrt/juno:juno_01
+
 #### TO DO:
 - setup AWS S3 bucket for data download/upload or buy 1T SSD  
 - convert /data to ORC/Parquet HDFS
